@@ -2,10 +2,9 @@
 using Discord;
 using System.Threading.Tasks;
 using System;
-using Microsoft.Extensions.Configuration;
-using DotNetEnv.Configuration;
 using Discord.Net;
 using Newtonsoft.Json;
+using Based.ExternalManagers;
 
 public class Program
 {
@@ -72,6 +71,10 @@ public class Program
 
     public async Task SlashCommandHandler(SocketSlashCommand cmd)
     {
-        await cmd.RespondAsync("Test.");
+        await cmd.DeferAsync();
+        var bibleGetter = new BibleVerseGetter();
+        var msgToSend = await bibleGetter.GetRandomVerse();
+        await cmd.ModifyOriginalResponseAsync(m => m.Content = msgToSend);
+
     }
 }

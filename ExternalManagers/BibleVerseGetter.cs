@@ -1,8 +1,9 @@
-﻿using System;
-using System.IO;
+﻿using Based.Models;
+using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Based.ExternalManagers
@@ -10,7 +11,7 @@ namespace Based.ExternalManagers
 
     public class BibleVerseGetter
     {
-        public async Task<string> GetRandomVerse()
+        public async Task<ResponseObjectModel> GetRandomVerse()
         {
             var client = new HttpClient();
 
@@ -29,7 +30,9 @@ namespace Based.ExternalManagers
             {
                 response.EnsureSuccessStatusCode();
                 var body = await response.Content.ReadAsStringAsync();
-                return body;
+                ResponseObjectModel[] responseInArray = JsonSerializer.Deserialize<ResponseObjectModel[]>(body);
+                ResponseObjectModel obj = responseInArray[0];
+                return obj;
             }
         }
     }

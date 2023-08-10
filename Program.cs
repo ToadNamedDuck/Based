@@ -74,7 +74,7 @@ public class Program
         await cmd.DeferAsync();
         var bibleGetter = new BibleVerseGetter();
         var msgToSend = await bibleGetter.GetRandomVerse();
-        await cmd.ModifyOriginalResponseAsync(m => m.Content = msgToSend);
+        await cmd.ModifyOriginalResponseAsync(m => m.Content = msgToSend.t);
 
     }
 }

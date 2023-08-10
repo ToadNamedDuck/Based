@@ -29,6 +29,7 @@ public class Program
         await _client.StartAsync();
 
         _client.Ready += Client_Ready;
+        _client.SlashCommandExecuted += SlashCommandHandler;
 
         // Block this task until the program is closed.
         await Task.Delay(-1);
@@ -67,5 +68,10 @@ public class Program
             // You can send this error somewhere or just print it to the console, for this example we're just going to print it.
             Console.WriteLine(json);
         }
+    }
+
+    public async Task SlashCommandHandler(SocketSlashCommand cmd)
+    {
+        await cmd.RespondAsync("Test.");
     }
 }

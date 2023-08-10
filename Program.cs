@@ -53,11 +53,17 @@ public class Program
         // Descriptions can have a max length of 100.
         guildCommand.WithDescription("Returns a random quote from the New Testament.");
 
+        //make a second guild command for a different discord server (guild)
+        var guild2 = _client.GetGuild(1068364448978444338);
+        var based2 = new SlashCommandBuilder();
+        based2.WithName("based");
+        based2.WithDescription("Returns a random quote from the New Testament.");
+
         try
         {
             // Now that we have our builder, we can call the CreateApplicationCommandAsync method to make our slash command.
             await guild.CreateApplicationCommandAsync(guildCommand.Build());
-
+            await guild2.CreateApplicationCommandAsync(based2.Build());
         }
         catch (ApplicationCommandException exception)
         {

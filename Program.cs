@@ -59,11 +59,15 @@ public class Program
         based2.WithName("based");
         based2.WithDescription("Returns a random quote from the New Testament.");
 
+        var guild3 = _client.GetGuild(931983109602308157);//Realized I could just make other guilds, probably using the creation hook, and apply a list of commands to them
+        //as they come in.
+
         try
         {
             // Now that we have our builder, we can call the CreateApplicationCommandAsync method to make our slash command.
             await guild.CreateApplicationCommandAsync(guildCommand.Build());
             await guild2.CreateApplicationCommandAsync(based2.Build());
+            await guild3.CreateApplicationCommandAsync(based2.Build());
         }
         catch (ApplicationCommandException exception)
         {
